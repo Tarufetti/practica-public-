@@ -1,0 +1,67 @@
+import re
+def arithmetic_arranger(problems):
+    
+
+    def numbervalidation(problems):  #Validate that argument contains only numbers.
+        for list in problems:
+            if re.search ('[a-zA-Z]',list):
+                return True
+    def operandvalidation(problems): #Validate that operators are NOT * or /
+        for list in problems:
+            if re.search ('[*|/]',list):
+                return True
+    def charlongitude(problems): #Validate that each operand has a maximum of 4 digits.
+        for list in problems:
+            pos = re.search('[+|\-]', list).start()
+            firstnumber = list[0:pos].rstrip()
+            secondnumber = list[pos+1:].lstrip()
+            if len(firstnumber) > 4 or len(secondnumber) > 4:
+                    return 0
+
+    Firstline = []
+    Secondline = []
+    Thirdline = []
+    Fourthline = []
+    for list in problems:
+        pos = re.search('[+|\-]', list).start()  #get index of operator
+        firstnumber = list[0:pos].rstrip() #isolate first operand
+        secondnumber = list[pos+1:].lstrip() #isolate second number
+        if len(firstnumber) >= len(secondnumber): #align numbers according to rules.
+            longestnumber = firstnumber.rjust(len(firstnumber)+2)
+            shortestnumber = secondnumber.rjust(len(firstnumber)+1)
+            Firstline.append(longestnumber)
+            Secondline.append(list[pos] + shortestnumber)
+            Thirdline.append("-"*(len(firstnumber)+2))
+            
+            #print(f'{longestnumber}\n{list[pos]} {shortestnumber}\n{"-"*(len(firstnumber)+2)}', end=" ")
+        elif len(secondnumber) > len(firstnumber):
+            longestnumber = firstnumber.rjust(len(secondnumber)+2)
+            shortestnumber = secondnumber.rjust(len(secondnumber)+1)
+            #print(f'{longestnumber}\n{list[pos]} {secondnumber}\n{"-"*(len(secondnumber)+2)}', end=" ")
+            Firstline.append(longestnumber)
+            Secondline.append(list[pos] + shortestnumber)
+            Thirdline.append("-"*(len(secondnumber)+2))
+
+    _1stline = '    '.join(Firstline)
+    _2ndline = '    '.join(Secondline)
+    _3rdline = '    '.join(Thirdline)
+
+    while True:
+        if len(problems) > 5:
+            print ("Too many problems.")
+            print ('Max number of problems is FIVE')
+            break
+        if numbervalidation(problems):
+            print("Error: Numbers must only contain digits")
+            break
+        if operandvalidation(problems):
+            print("Error: Operator must be '+' or '-'.'")
+            break
+        if  charlongitude(problems) == 0:
+            print('Error: Numbers cannot be more than four digits.')
+            break
+        else:
+            print (f'{_1stline}\n{_2ndline}\n{_3rdline}')
+            break
+
+arithmetic_arranger(['23 + 2442', '12 - 2', '2462 - 543', '22 - 2', '152 + 64'])
