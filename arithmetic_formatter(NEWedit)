@@ -1,5 +1,10 @@
 import re
-def arithmetic_arranger(problems):
+def arithmetic_arranger(problems, *args):
+        
+    Firstline = []
+    Secondline = []
+    Thirdline = []
+    Fourthline = []
     
 
     def numbervalidation(problems):  #Validate that argument contains only numbers.
@@ -17,35 +22,47 @@ def arithmetic_arranger(problems):
             secondnumber = list[pos+1:].lstrip()
             if len(firstnumber) > 4 or len(secondnumber) > 4:
                     return 0
-
-    Firstline = []
-    Secondline = []
-    Thirdline = []
-    Fourthline = []
+    def optional_fourth_line():
+        _1stoperand = int(firstnumber)
+        _2ndoperand = int(secondnumber)
+        
+        if list[pos] == '+':
+            return  _1stoperand + _2ndoperand
+        elif list[pos] == '-':
+            return  _1stoperand - _2ndoperand
+  
     for list in problems:
         pos = re.search('[+|\-]', list).start()  #get index of operator
         firstnumber = list[0:pos].rstrip() #isolate first operand
         secondnumber = list[pos+1:].lstrip() #isolate second number
+        result = optional_fourth_line()
         if len(firstnumber) >= len(secondnumber): #align numbers according to rules.
             longestnumber = firstnumber.rjust(len(firstnumber)+2)
             shortestnumber = secondnumber.rjust(len(firstnumber)+1)
+            result = str(result).rjust(len(firstnumber)+2)
+
             Firstline.append(longestnumber)
             Secondline.append(list[pos] + shortestnumber)
             Thirdline.append("-"*(len(firstnumber)+2))
-            
-            #print(f'{longestnumber}\n{list[pos]} {shortestnumber}\n{"-"*(len(firstnumber)+2)}', end=" ")
+            Fourthline.append(result)
+
         elif len(secondnumber) > len(firstnumber):
             longestnumber = firstnumber.rjust(len(secondnumber)+2)
             shortestnumber = secondnumber.rjust(len(secondnumber)+1)
-            #print(f'{longestnumber}\n{list[pos]} {secondnumber}\n{"-"*(len(secondnumber)+2)}', end=" ")
+            result = str(result).rjust(len(secondnumber)+2)
+
             Firstline.append(longestnumber)
             Secondline.append(list[pos] + shortestnumber)
             Thirdline.append("-"*(len(secondnumber)+2))
+            Fourthline.append(result)
+        
 
     _1stline = '    '.join(Firstline)
     _2ndline = '    '.join(Secondline)
     _3rdline = '    '.join(Thirdline)
+    _4rdline = '    '.join(Fourthline)
 
+      
     while True:
         if len(problems) > 5:
             print ("Too many problems.")
