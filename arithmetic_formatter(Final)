@@ -6,7 +6,6 @@ def arithmetic_arranger(problems, *args):
     Thirdline = []
     Fourthline = []
     
-
     def numbervalidation(problems):  #Validate that argument contains only numbers.
         for list in problems:
             if re.search ('[a-zA-Z]',list):
@@ -77,8 +76,11 @@ def arithmetic_arranger(problems, *args):
         if  charlongitude(problems) == 0:
             print('Error: Numbers cannot be more than four digits.')
             break
+        if 'True' or True in args:
+             print (f'{_1stline}\n{_2ndline}\n{_3rdline}\n{_4rdline}')
+             break
         else:
             print (f'{_1stline}\n{_2ndline}\n{_3rdline}')
             break
 
-arithmetic_arranger(['23 + 2442', '12 - 2', '2462 - 543', '22 - 2', '152 + 64'])
+arithmetic_arranger(['23 + 2442', '12 - 2', '2462 - 543', '22 - 2', '152 + 64'], True)
