@@ -1,5 +1,5 @@
 import re
-def arithmetic_arranger(problems, *args):
+def arithmetic_arranger(problems, bool_var=False):
         
     Firstline = []
     Secondline = []
@@ -76,11 +76,9 @@ def arithmetic_arranger(problems, *args):
         if  charlongitude(problems) == 0:
             print('Error: Numbers cannot be more than four digits.')
             break
-        if 'True' or True in args:
+        if bool_var:
              print (f'{_1stline}\n{_2ndline}\n{_3rdline}\n{_4rdline}')
              break
         else:
             print (f'{_1stline}\n{_2ndline}\n{_3rdline}')
             break
-
-arithmetic_arranger(['23 + 2442', '12 - 2', '2462 - 543', '22 - 2', '152 + 64'], True)
