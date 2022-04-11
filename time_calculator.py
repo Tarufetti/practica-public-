@@ -1,3 +1,8 @@
+
+STRINGS DO NOT CHANGE!!!
+
+
+
 def time_calculator(start, duration, day='none'):
 
     start = '12:00 PM'
