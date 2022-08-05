@@ -1,0 +1,43 @@
+
+def dirReduc(arr):
+    arr.append('Auxiliary variable')
+    result = []
+    final_result= []
+    def opposites(a, b):
+
+         if a == 'NORTH' and b == 'SOUTH':
+            return True
+         if a == 'SOUTH' and b == 'NORTH':
+            return True
+         if a == 'EAST' and b == 'WEST':
+            return True
+         if a == 'WEST' and b == 'EAST':
+            return True
+    index1 = 0
+    index2 = 1
+    while index2 < (len(arr)):
+        if not opposites(arr[index1], arr[index2]):
+            result.append(arr[index1])
+            index1 +=1
+            index2 +=1
+        else:
+            index1 +=2
+            index2 +=2
+    result.append('Auxiliary variable')
+    index1 = 0
+    index2 = 1
+    while index2 < (len(result)):
+            print(index1, index2)
+            if len(result) <1:
+                break
+            if not opposites(result[index1], result[index2]):
+                final_result.append(result[index1])
+                print(final_result)
+                index1 +=1
+                index2 +=1
+            else:
+                index1 +=2
+                index2 +=2
+
+    return final_result
+print(dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST", "WEST"]))
